@@ -1,10 +1,22 @@
 import React, { useState } from "react";
 import "./Application.scss";
 import { DateTime } from "luxon";
+import { gql, useMutation } from '@apollo/client';
+
+const ADD_DAY = gql`
+  mutation AddDay($weight: Float!, $note: String){
+    addDay(weight: $weight, note: $note){
+      id
+      weight
+      note
+    }
+  }
+`
 
 function Application() {
   const [weight, setWeight] = useState(0);
   const [date, setDate] = useState(DateTime.local().toISODate());
+  const [addDay] = useMutation(ADD_DAY)
 
   const onWeightButtonClick = (change: number) => () => {
     const newWeight = Number(weight) + change;
@@ -22,6 +34,12 @@ function Application() {
   const onDateChange = (e: any) => {
     setDate(e.target.value);
   };
+
+  const onInputKeyPress = (e: any) => {
+    if(e.key === 'Enter'){
+      addDay({variables: {weight: Number(weight), note: 'today is beautiful'}})
+    }
+  }
 
   return (
     <div className="container">
@@ -45,6 +63,7 @@ function Application() {
             <input
               className="weight__input"
               type="number"
+              onKeyPress={onInputKeyPress}
               onChange={onInputChange}
               value={weight}
               min="0"
