@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { DateTime } from "luxon";
 import { gql, useMutation } from "@apollo/client";
 
-import "./Application.scss";
+import "./AddDay.scss";
 
 const ADD_DAY = gql`
   mutation AddDay($weight: Float!, $note: String) {
