@@ -1,0 +1,18 @@
+@import "../bulmaVariables.scss";
+
+.day-input {
+  width: 500px;
+
+  &__input {
+    margin-right: 8px;
+    width: 90px;
+  }
+
+  &__input-save {
+    height: 20px;
+  }
+
+  &__weight {
+    align-items: center;
+  }
+}

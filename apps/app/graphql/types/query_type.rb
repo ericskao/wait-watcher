@@ -1,17 +1,20 @@
 module Types
   class QueryType < Types::BaseObject
-    # Add root-level fields here.
-    # They will be entry points for queries on your schema.
-    field :days, [Types::DayType], null: false
-    def days
-      Day.all
+    field :day, Types::DayType, null: true, description: 'Get a Day by date' do
+      argument :date, String, required: false, description: 'Date (string)'
     end
 
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World!"
+    field :days, [Types::DayType], null: false, description: 'Get range of days' do
+      argument :start_date, String, required: false, description: 'Range start'
+      argument :end_date, String, required: false, description: 'Range end date'
+    end
+
+    def day(date: nil)
+      Day.find_by(date: date || Date.today)
+    end
+
+    def days(start_date: nil, end_date: nil)
+      Day.where(date: start_date..end_date)
     end
   end
 end

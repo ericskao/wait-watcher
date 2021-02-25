@@ -1,0 +1,196 @@
+@import "~bulma/sass/utilities/initial-variables";
+@import "~bulma/sass/utilities/functions";
+
+// Fixes an issue with Bulma and PostCSS warnings
+$variable-columns: false;
+
+$size-1: 50px;
+$size-4: 24px;
+$size-5: 20px;
+$size-6: 16px;
+$size-7: 12px;
+$size-8: 10px;
+$body-size: 14px;
+$left-nav-width: 275px;
+$desktop: 960px + $left-nav-width;
+$tablet: 500px;
+$widescreen: 1700px;
+$fullhd: 2150px;
+
+$input-arrow: $black;
+
+$active-color: #1fc8a4;
+$active-color-invert: findColorInvert($active-color);
+$red: #fa5349;
+
+$home-color: #1eb0dc;
+$home-color-invert: findColorInvert($home-color);
+$away-color: #ff6473;
+$away-color-invert: findColorInvert($away-color);
+
+//metric colors
+$malibu-color: #8bb4fa;
+$malibu-color-invert: findColorInvert($malibu-color);
+$curious-blue-color: #1e86dc;
+$curious-blue-color-invert: findColorInvert($curious-blue-color);
+$coral-color: #f35867;
+$coral-color-invert: findColorInvert($coral-color);
+$sunset-orange-color: #fa5a41;
+$sunset-orange-color-invert: findColorInvert($sunset-orange-color);
+$gray-color: #858585;
+$gray-color-invert: findColorInvert($gray-color);
+$enjoy-yellow-color: #ffaf1a;
+$enjoy-yellow-color-invert: findColorInvert($enjoy-yellow-color);
+$enjoy-lime-color: #86ce36;
+$enjoy-lime-color-invert: findColorInvert($enjoy-lime-color);
+$light-gray-color: #eee;
+$light-gray-color-invert: findColorInvert($light-gray-color);
+$lighter-gray-color: #ddd;
+$lighter-gray-color-invert: findColorInvert($lighter-gray-color);
+$white-grey-color: #f5f5f5;
+$white-grey-color-invert: findColorInvert($white-grey-color);
+$teal-color: #1fc8a4;
+$turquoise-color: #32959d;
+$turquoise-color-invert: findColorInvert($turquoise-color);
+$teal-color-invert: findColorInvert($teal-color);
+$dark-pink-color: #ec61aa;
+$dark-pink-color-invert: findColorInvert($dark-pink-color);
+$purple-color: #806ed2;
+$purple-color-invert: findColorInvert($purple-color);
+$dark-green-color: #005769;
+$dark-green-color-invert: findColorInvert($dark-green-color);
+$bronze-color: #ad8a57;
+$bronze-color-invert: findColorInvert($bronze-color);
+$ocre-color: #e59d17;
+$ocre-color-invert: findColorInvert($ocre-color);
+$silver-gray-color: #707070;
+$silver-gray-color-invert: findColorInvert($silver-gray-color);
+$grey-default-color: #bbb;
+$grey-default-color-invert: findColorInvert($grey-default-color);
+$dark-grey-color: #333;
+$dark-grey-color-invert: findColorInvert($dark-grey-color);
+
+$family-sans-serif: "MarkOT", "Lato", "Helvetica Neue", sans-serif;
+$body-background-color: $white-ter;
+$footer-background-color: #eee;
+
+$tabs-border-bottom-color: $white-ter;
+$tabs-border-bottom-width: 3px;
+$tabs-link-active-border-bottom-color: $home-color;
+$tabs-link-active-color: $black;
+
+$navbar-z: 0;
+
+$box-shadow: none;
+$box-radius: 20px;
+
+$button-focus-border-color: 0;
+$button-focus-box-shadow-color: 0;
+
+$progress-bar-background-color: $white-grey-color;
+$input-focus-border-color: $enjoy-yellow-color;
+
+$table-cell-padding: 10px 1rem;
+
+@import "~bulma/sass/utilities/derived-variables.sass";
+
+// Add new colors to the Color Map
+$addColors: (
+  "home": (
+    $home-color,
+    $home-color-invert,
+  ),
+  "away": (
+    $away-color,
+    $away-color-invert,
+  ),
+  "active": (
+    $active-color,
+    $active-color-invert,
+  ),
+  "grey-default": (
+    $grey-default-color,
+    $grey-default-color-invert,
+  ),
+  "dark-grey": (
+    $dark-grey-color,
+    $dark-grey-color-invert,
+  ),
+  "silver-gray": (
+    $silver-gray-color,
+    $silver-gray-color-invert,
+  ),
+  "white-grey": (
+    $white-grey-color,
+    $white-grey-color-invert,
+  ),
+  "light-gray": (
+    $light-gray-color,
+    $light-gray-color-invert,
+  ),
+  "lighter-gray": (
+    $lighter-gray-color,
+    $lighter-gray-color-invert,
+  ),
+  "coral": (
+    $coral-color,
+    $coral-color-invert,
+  ),
+  "malibu": (
+    $malibu-color,
+    $malibu-color-invert,
+  ),
+  "dark-pink": (
+    $dark-pink-color,
+    $dark-pink-color-invert,
+  ),
+  "curious-blue": (
+    $curious-blue-color,
+    $curious-blue-color-invert,
+  ),
+  "sunset-orange": (
+    $sunset-orange-color,
+    $sunset-orange-color-invert,
+  ),
+  "ocre": (
+    $ocre-color,
+    $ocre-color-invert,
+  ),
+  "gray": (
+    $gray-color,
+    $gray-color-invert,
+  ),
+  "enjoy-yellow": (
+    $enjoy-yellow-color,
+    $enjoy-yellow-color-invert,
+  ),
+  "enjoy-lime": (
+    $enjoy-lime-color,
+    $enjoy-lime-color-invert,
+  ),
+  "teal": (
+    $teal-color,
+    $teal-color-invert,
+  ),
+  "turquoise": (
+    $turquoise-color,
+    $turquoise-color-invert,
+  ),
+  "purple": (
+    $purple-color,
+    $purple-color-invert,
+  ),
+  "dark-green": (
+    $dark-green-color,
+    $dark-green-color-invert,
+  ),
+  "bronze": (
+    $bronze-color,
+    $bronze-color-invert,
+  ),
+);
+
+$colors: map-merge($colors, $addColors);
+$sizes: append($sizes, $size-8);
+
+$wel-tab-overflow: 410px;

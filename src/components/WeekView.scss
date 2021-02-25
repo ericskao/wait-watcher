@@ -1,0 +1,24 @@
+@import "../bulmaVariables.scss";
+
+.week-view {
+  padding: 20px 40px;
+  // margin-bottom: 60px;
+
+  &__day {
+    &:hover {
+      background-color: #ddd;
+    }
+    color: $gray-color;
+    &--selected-date {
+      color: $black;
+    }
+    &--non-selected-date {
+      opacity: 0.6;
+    }
+    width: 60px;
+  }
+
+  &__row {
+    margin-bottom: 40px;
+  }
+}

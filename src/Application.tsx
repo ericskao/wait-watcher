@@ -1,12 +1,13 @@
 import React from "react";
-import { Link, RouteComponentProps, Router } from "@reach/router";
+import { RouteComponentProps, Router } from "@reach/router";
 import AddDay from "./pages/add-day/AddDay";
-import LeftNav from "./components/LeftNav";
+import TopNav from "./components/TopNav";
 import "./Application.scss";
+import WeekView from "./components/WeekView";
 
 const App = () => (
   <>
-    <LeftNav />
+    <TopNav />
     <Router>
       <Home path="/" />
       <Dashboard path="/dashboard" />
@@ -14,11 +15,7 @@ const App = () => (
   </>
 );
 
-const Home = (props: RouteComponentProps) => (
-  <nav>
-    <Link to="/">Home</Link> <Link to="dashboard">Dashboard</Link>
-  </nav>
-);
+const Home = (props: RouteComponentProps) => <WeekView />;
 
 const Dashboard = (props: RouteComponentProps) => <AddDay />;
 
