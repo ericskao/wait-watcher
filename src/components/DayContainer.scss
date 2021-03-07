@@ -1,7 +1,15 @@
 @import "../bulmaVariables.scss";
 
-.day-input {
+.day-container {
   width: 500px;
+
+  &__card-info {
+    width: 350px;
+  }
+
+  &__checkbox {
+    width: 150px;
+  }
 
   &__input {
     margin-right: 8px;

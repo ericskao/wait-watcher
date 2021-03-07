@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import { days } from "../javascript/utils/getDaysArray";
 
 import "./WeekView.scss";
-import DayInput from "./DayInput";
+import DayContainer from "./DayContainer";
 import { gql, useQuery } from "@apollo/client";
+import { Icon } from "@blueprintjs/core";
 
 export const WEEK_QUERY = gql`
   query WeekQuery($startDate: String, $endDate: String) {
@@ -28,11 +29,16 @@ export const WeekContext = React.createContext({
 export default function WeekView() {
   const dt = DateTime.local();
   const month = dt.toFormat("LLLL y");
-  const interval = Interval.fromDateTimes(dt.startOf("week"), dt.endOf("week"));
+
+  const [week, setWeek] = useState(0);
+  const interval = Interval.fromDateTimes(
+    dt.plus({ week: week }).startOf("week"),
+    dt.plus({ week }).endOf("week")
+  );
 
   const [selectedDate, setDate] = useState(dt);
-  const startDate = dt.startOf("week").toISODate();
-  const endDate = dt.endOf("week").toISODate();
+  const startDate = dt.startOf("week").plus({ week }).toISODate();
+  const endDate = dt.endOf("week").plus({ week }).toISODate();
 
   const { loading, data } = useQuery(WEEK_QUERY, {
     variables: {
@@ -41,6 +47,10 @@ export default function WeekView() {
     },
   });
 
+  const changeWeek = (newWeek: number) => () => {
+    setWeek(week + newWeek);
+  };
+
   console.log("loading", loading, "data", data);
 
   return (
@@ -48,8 +58,9 @@ export default function WeekView() {
       value={{ selectedDate, startDate, endDate, days: data?.days }}
     >
       <div className="week-view">
-        <b>{month}</b>
-        <div className="week-view__row is-flex">
+        <div className="mb-4 has-text-weight-bold">{month}</div>
+        <div className="week-view__row px-4 is-flex is-align-items-center">
+          <Icon icon="chevron-left" onClick={changeWeek(-1)} />
           {Array.from(days(interval)).map((day, index) => {
             const classname = cx("has-text-weight-bold", {
               "week-view__day--selected-date": selectedDate.hasSame(day, "day"),
@@ -71,8 +82,9 @@ export default function WeekView() {
               </div>
             );
           })}
+          <Icon icon="chevron-right" onClick={changeWeek(1)} />
         </div>
-        <DayInput />
+        <DayContainer />
       </div>
     </WeekContext.Provider>
   );
