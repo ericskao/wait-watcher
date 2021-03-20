@@ -9,7 +9,12 @@ import {
   Slider,
   TextArea,
 } from "@blueprintjs/core";
-import { Classes, Elevation, Intent } from "@blueprintjs/core/lib/esm/common";
+import {
+  Alignment,
+  Classes,
+  Elevation,
+  Intent,
+} from "@blueprintjs/core/lib/esm/common";
 import React, {
   ChangeEvent,
   FormEvent,
@@ -45,16 +50,22 @@ export default function DayInput() {
   const [note, setNote] = useState<string>("");
   const [sleepValue, setSleepValue] = useState<number>(0);
   const [itchValue, setItchValue] = useState<number>(0);
-  const [textAreaValue, setTextArea] = useState<number>(0);
+  const [multivitaminValue, setMultivitamin] = useState<boolean>(false);
+  const [benadrylValue, setBenadryl] = useState<boolean>(false);
+  const [exerciseValue, setExercise] = useState<boolean>(false);
+  const [alcoholValue, setAlcohol] = useState<boolean>(false);
+  const [antihistamineValue, setAntihistamine] = useState<boolean>(false);
+  const [vitaminDValue, setVitaminD] = useState<boolean>(false);
+  const [fishOilValue, setFishOil] = useState<boolean>(false);
+  const [probioticValue, setProbiotic] = useState<boolean>(false);
+  const [coffeeValue, setCoffee] = useState<boolean>(false);
+  const [collagenValue, setCollagen] = useState<boolean>(false);
+
   const weekContext = useContext(WeekContext);
   const { selectedDate, days, startDate, endDate } = weekContext;
 
   const changeWeight = (e: ChangeEvent<HTMLInputElement>) => {
     setWeight(e.target.value);
-  };
-
-  const textAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setTextArea(Number(e.currentTarget.value));
   };
 
   const addDay = () => {
@@ -141,45 +152,101 @@ export default function DayInput() {
               />
             </div>
           </FormGroup>
-          <div>
-            <div>Sleep (previous night)</div>
-            <Slider
-              showTrackFill
-              labelStepSize={10}
-              onChange={(val) => setSleepValue(val)}
-              value={sleepValue}
+          <div className="my-3">
+            <div className="mb-2">Sleep (previous night)</div>
+            <div className="px-5">
+              <Slider
+                showTrackFill
+                labelStepSize={10}
+                onChange={(val) => setSleepValue(val)}
+                value={sleepValue}
+              />
+            </div>
+          </div>
+          <div className="mb-4">
+            <div className="mb-2">Itch (previous day)</div>
+            <div className="px-5">
+              <Slider
+                showTrackFill
+                labelStepSize={10}
+                onChange={(val) => setItchValue(val)}
+                value={itchValue}
+              />
+            </div>
+          </div>
+          <div className="is-flex is-flex-wrap-wrap has-text-right is-justify-content-center mb-4">
+            <Checkbox
+              className="day-container__checkbox mx-2"
+              onChange={() => setAntihistamine(!antihistamineValue)}
+              alignIndicator={Alignment.RIGHT}
+              checked={antihistamineValue}
+              label="Antihistamine"
             />
-          </div>
-          <div>
-            <div>Itch</div>
-            <Slider
-              showTrackFill
-              labelStepSize={10}
-              onChange={(val) => setItchValue(val)}
-              value={itchValue}
+            <Checkbox
+              className="day-container__checkbox mx-2"
+              onChange={() => setBenadryl(!benadrylValue)}
+              alignIndicator={Alignment.RIGHT}
+              checked={benadrylValue}
+              label="Benadryl"
             />
-          </div>
-          <div className="is-flex is-flex-wrap-wrap">
-            <div className="is-flex day-container__checkbox">
-              <span className="mr-2">Loratadine</span> <Checkbox />
-            </div>
-            <div className="is-flex day-container__checkbox">
-              <span className="mr-2">Benadryl</span> <Checkbox />
-            </div>
-            <div className="is-flex day-container__checkbox">
-              <span className="mr-2">Multivitamin</span> <Checkbox />
-            </div>
-            <div
-              className="is-flex
-            day-container__checkbox"
-            >
-              <span className="mr-2">Vitamin D</span> <Checkbox />
-            </div>
-            <div className="is-flex day-container__checkbox">
-              <span className="mr-2">Fish oil</span> <Checkbox />
-            </div>
-          </div>
+            <Checkbox
+              className="day-container__checkbox mx-2"
+              onChange={() => setMultivitamin(!multivitaminValue)}
+              alignIndicator={Alignment.RIGHT}
+              checked={multivitaminValue}
+              label="Multivitamin"
+            />
+            <Checkbox
+              className="day-container__checkbox mx-2"
+              onChange={() => setVitaminD(!vitaminDValue)}
+              alignIndicator={Alignment.RIGHT}
+              checked={vitaminDValue}
+              label="Vitamin D"
+            />
+            <Checkbox
+              className="day-container__checkbox mx-2"
+              onChange={() => setFishOil(!fishOilValue)}
+              alignIndicator={Alignment.RIGHT}
+              checked={fishOilValue}
+              label="Fish Oil"
+            />
+            <Checkbox
+              className="day-container__checkbox mx-2"
+              onChange={() => setProbiotic(!probioticValue)}
+              alignIndicator={Alignment.RIGHT}
+              checked={probioticValue}
+              label="Probiotic"
+            />
+            <Checkbox
+              className="day-container__checkbox mx-2"
+              onChange={() => setCollagen(!collagenValue)}
+              alignIndicator={Alignment.RIGHT}
+              checked={collagenValue}
+              label="Collagen"
+            />
+            <Checkbox
+              className="day-container__checkbox mx-2"
+              onChange={() => setExercise(!exerciseValue)}
+              alignIndicator={Alignment.RIGHT}
+              checked={exerciseValue}
+              label="Exercise"
+            />
 
+            <Checkbox
+              className="day-container__checkbox mx-2"
+              onChange={() => setCoffee(!coffeeValue)}
+              alignIndicator={Alignment.RIGHT}
+              checked={coffeeValue}
+              label="Coffee"
+            />
+            <Checkbox
+              className="day-container__checkbox mx-2"
+              onChange={() => setAlcohol(!alcoholValue)}
+              alignIndicator={Alignment.RIGHT}
+              checked={alcoholValue}
+              label="Alcohol"
+            />
+          </div>
           <EditableText
             confirmOnEnterKey
             onConfirm={confirmText}
@@ -191,6 +258,9 @@ export default function DayInput() {
             value={note}
           />
         </form>
+        <div className="mt-5 mb-4 has-text-centered">
+          <Button>Save</Button>
+        </div>
       </Card>
     </div>
   );
