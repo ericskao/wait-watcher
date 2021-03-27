@@ -31,12 +31,14 @@ export default function WeekView() {
   const month = dt.toFormat("LLLL y");
 
   const [week, setWeek] = useState(0);
+  const [selectedDate, setDate] = useState(dt);
+
+  // const [month, setMonth] = useState<DateTime>()
   const interval = Interval.fromDateTimes(
     dt.plus({ week: week }).startOf("week"),
     dt.plus({ week }).endOf("week")
   );
 
-  const [selectedDate, setDate] = useState(dt);
   const startDate = dt.startOf("week").plus({ week }).toISODate();
   const endDate = dt.endOf("week").plus({ week }).toISODate();
 
@@ -84,7 +86,10 @@ export default function WeekView() {
           })}
           <Icon icon="chevron-right" onClick={changeWeek(1)} />
         </div>
-        <DayContainer />
+        <div className="is-flex">
+          <DayContainer />
+          <div>Food log</div>
+        </div>
       </div>
     </WeekContext.Provider>
   );

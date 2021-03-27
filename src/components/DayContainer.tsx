@@ -7,7 +7,6 @@ import {
   FormGroup,
   InputGroup,
   Slider,
-  TextArea,
 } from "@blueprintjs/core";
 import {
   Alignment,
@@ -28,12 +27,51 @@ import "./DayContainer.scss";
 import { WeekContext, WEEK_QUERY } from "./WeekView";
 
 const ADD_WEIGHT = gql`
-  mutation AddWeight($weight: Float!, $note: String, $date: String!) {
-    addDay(weight: $weight, note: $note, date: $date) {
+  mutation AddWeight(
+    $weight: Float!
+    $note: String
+    $date: String!
+    $antihistamine: Boolean
+    $sleepRating: Int
+    $itchRating: Int
+    $boneBroth: Boolean
+    $multivitamin: Boolean
+    $vitaminD: Boolean
+    $fishOil: Boolean
+    $probiotic: Boolean
+    $collagen: Boolean
+    $exercise: Boolean
+    $moisturized: Boolean
+    $hempOil: Boolean
+    $coffee: Boolean
+    $alcohol: Boolean
+  ) {
+    addDay(
+      weight: $weight
+      note: $note
+      date: $date
+      antihistamine: $antihistamine
+      sleepRating: $sleepRating
+      itchRating: $itchRating
+      boneBroth: $boneBroth
+      multivitamin: $multivitamin
+      vitaminD: $vitaminD
+      fishOil: $fishOil
+      probiotic: $probiotic
+      collagen: $collagen
+      exercise: $exercise
+      moisturized: $moisturized
+      hempOil: $hempOil
+      coffee: $coffee
+      alcohol: $alcohol
+    ) {
       id
       weight
       date
       note
+      antihistamine
+      # sleepRating
+      # itchRating
     }
   }
 `;
@@ -51,7 +89,7 @@ export default function DayInput() {
   const [sleepValue, setSleepValue] = useState<number>(0);
   const [itchValue, setItchValue] = useState<number>(0);
   const [multivitaminValue, setMultivitamin] = useState<boolean>(false);
-  const [benadrylValue, setBenadryl] = useState<boolean>(false);
+  const [collagenValue, setCollagen] = useState<boolean>(false);
   const [exerciseValue, setExercise] = useState<boolean>(false);
   const [alcoholValue, setAlcohol] = useState<boolean>(false);
   const [antihistamineValue, setAntihistamine] = useState<boolean>(false);
@@ -59,7 +97,9 @@ export default function DayInput() {
   const [fishOilValue, setFishOil] = useState<boolean>(false);
   const [probioticValue, setProbiotic] = useState<boolean>(false);
   const [coffeeValue, setCoffee] = useState<boolean>(false);
-  const [collagenValue, setCollagen] = useState<boolean>(false);
+  const [brothValue, setBroth] = useState<boolean>(false);
+  const [hempValue, setHemp] = useState<boolean>(false);
+  const [moisturizeValue, setMoisturize] = useState<boolean>(false);
 
   const weekContext = useContext(WeekContext);
   const { selectedDate, days, startDate, endDate } = weekContext;
@@ -78,6 +118,20 @@ export default function DayInput() {
         weight: Number(weight),
         note,
         date: selectedDate.toISODate(),
+        sleepRating: sleepValue,
+        itchRating: itchValue,
+        antihistamine: antihistamineValue,
+        boneBroth: brothValue,
+        multivitamin: multivitaminValue,
+        vitaminD: vitaminDValue,
+        fishOil: fishOilValue,
+        probiotic: probioticValue,
+        collagen: collagenValue,
+        exercise: exerciseValue,
+        moisturized: moisturizeValue,
+        hempOil: hempValue,
+        coffee: coffeeValue,
+        alcohol: alcoholValue,
       },
     });
   };
@@ -103,6 +157,10 @@ export default function DayInput() {
 
   const editNote = (text: string) => {
     setNote(text);
+  };
+
+  const saveDay = () => {
+    addDay();
   };
 
   useEffect(() => {
@@ -184,10 +242,10 @@ export default function DayInput() {
             />
             <Checkbox
               className="day-container__checkbox mx-2"
-              onChange={() => setBenadryl(!benadrylValue)}
+              onChange={() => setCollagen(!collagenValue)}
               alignIndicator={Alignment.RIGHT}
-              checked={benadrylValue}
-              label="Benadryl"
+              checked={collagenValue}
+              label="Collagen"
             />
             <Checkbox
               className="day-container__checkbox mx-2"
@@ -219,10 +277,10 @@ export default function DayInput() {
             />
             <Checkbox
               className="day-container__checkbox mx-2"
-              onChange={() => setCollagen(!collagenValue)}
+              onChange={() => setBroth(!brothValue)}
               alignIndicator={Alignment.RIGHT}
-              checked={collagenValue}
-              label="Collagen"
+              checked={brothValue}
+              label="Bone Broth"
             />
             <Checkbox
               className="day-container__checkbox mx-2"
@@ -231,7 +289,20 @@ export default function DayInput() {
               checked={exerciseValue}
               label="Exercise"
             />
-
+            <Checkbox
+              className="day-container__checkbox mx-2"
+              onChange={() => setMoisturize(!moisturizeValue)}
+              alignIndicator={Alignment.RIGHT}
+              checked={moisturizeValue}
+              label="Moisturized"
+            />
+            <Checkbox
+              className="day-container__checkbox mx-2"
+              onChange={() => setHemp(!hempValue)}
+              alignIndicator={Alignment.RIGHT}
+              checked={hempValue}
+              label="Hemp Oil"
+            />
             <Checkbox
               className="day-container__checkbox mx-2"
               onChange={() => setCoffee(!coffeeValue)}
@@ -259,7 +330,7 @@ export default function DayInput() {
           />
         </form>
         <div className="mt-5 mb-4 has-text-centered">
-          <Button>Save</Button>
+          <Button onClick={() => saveDay()}>Save</Button>
         </div>
       </Card>
     </div>
